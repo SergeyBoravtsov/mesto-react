@@ -1,2 +1,3 @@
 # mesto-react
-*start...
+
+* Начало портирования проекта Mesto на React
