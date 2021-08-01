@@ -1,20 +1,24 @@
 import React from "react";
-import api from "../utils/Api.js";
+import api from "../utils/api.js";
 import Card from "./Card.js";
 
 function Main(props) {
-  const [userName, setUserName] = React.useState();
-  const [userDescription, setUserDescription] = React.useState();
-  const [userAvatar, setUserAvatar] = React.useState();
+  const [userName, setUserName] = React.useState("");
+  const [userDescription, setUserDescription] = React.useState("");
+  const [userAvatar, setUserAvatar] = React.useState("");
   const [cards, setCards] = React.useState([]);
 
   React.useEffect(() => {
-    Promise.all([api.getProfileInfo(), api.getAllCards()]).then((result) => {
-      setUserName(result[0].name);
-      setUserDescription(result[0].about);
-      setUserAvatar(result[0].avatar);
-      setCards(result[1]);
-    });
+    Promise.all([api.getProfileInfo(), api.getAllCards()])
+      .then(([userData, cardsData]) => {
+        setUserName(userData.name);
+        setUserDescription(userData.about);
+        setUserAvatar(userData.avatar);
+        setCards(cardsData);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
   }, []);
 
   return (
@@ -50,12 +54,8 @@ function Main(props) {
 
       <section className="cards">
         <ul className="cards__list">
-          {cards.map((card) => (
-            <Card
-              key={card._id}
-              cardObj={card}
-              onCardClick={props.onCardClick}
-            />
+          {cards.map((item) => (
+            <Card key={item._id} card={item} onCardClick={props.onCardClick} />
           ))}
         </ul>
       </section>

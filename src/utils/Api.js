@@ -1,3 +1,5 @@
+import {myToken} from './constants.js'
+
 class Api {
   constructor(options) {
     this._options = options;
@@ -69,8 +71,6 @@ class Api {
     }).then((res) => this._handleResponse(res));
   }
 }
-
-const myToken = "7df66c64-16f3-4e8e-82cb-5680579d3632";
 
 const api = new Api({
   url: "https://mesto.nomoreparties.co/v1/cohort-23",
