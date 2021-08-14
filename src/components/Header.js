@@ -3,7 +3,7 @@ import React from "react";
 function Header() {
   return (
     <header className="header">
-      <a href="#" className="header__logo" target="_self"></a>
+      <div className="header__logo"></div>
     </header>
   );
 }
