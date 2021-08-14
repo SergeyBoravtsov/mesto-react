@@ -22,7 +22,7 @@ function EditProfilePopup({ isOpen, onClose, onUpdateUser, isLoading }) {
   React.useEffect(() => {
     setName(currentUser.name);
     setDescription(currentUser.about);
-  }, [currentUser]);
+  }, [currentUser, isOpen]);
 
   function handleSubmit(e) {
     // Запрещаем браузеру переходить по адресу формы
@@ -42,6 +42,8 @@ function EditProfilePopup({ isOpen, onClose, onUpdateUser, isLoading }) {
       isOpen={isOpen}
       onClose={onClose}
       onSubmit={handleSubmit}
+      buttonText={isLoading ? "Сохранение..." : "Сохранить"}
+      buttonName="save-profile"
     >
       <input
         type="text"
@@ -69,9 +71,6 @@ function EditProfilePopup({ isOpen, onClose, onUpdateUser, isLoading }) {
         onChange={handleChangeDescription}
       />
       <span id="userabout-error" className="popup__error"></span>
-      <button type="submit" name="save-profile" className="popup__button">
-        {isLoading ? "Сохранение..." : "Сохранить"}
-      </button>
     </PopupWithForm>
   );
 }

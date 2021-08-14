@@ -20,6 +20,8 @@ function EditAvatarPopup({ isOpen, onClose, onUpdateAvatar, isLoading }) {
       isOpen={isOpen}
       onClose={onClose}
       onSubmit={handleSubmit}
+      buttonText={isLoading ? "Сохранение..." : "Сохранить"}
+      buttonName="save-avatar"
     >
       <input
         type="url"
@@ -32,9 +34,6 @@ function EditAvatarPopup({ isOpen, onClose, onUpdateAvatar, isLoading }) {
         required
       />
       <span id="avatarlink-error" className="popup__error"></span>
-      <button type="submit" name="save-avatar" className="popup__button">
-        {isLoading ? "Сохранение..." : "Сохранить"}
-      </button>
     </PopupWithForm>
   );
 }

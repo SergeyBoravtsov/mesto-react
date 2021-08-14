@@ -30,6 +30,8 @@ function AddPlacePopup({ isOpen, onClose, onAddPlace, isLoading }) {
       isOpen={isOpen}
       onClose={onClose}
       onSubmit={handleSubmit}
+      buttonText={isLoading ? "Сохранение..." : "Создать"}
+      buttonName="add-place"
     >
       <input
         type="text"
@@ -56,9 +58,6 @@ function AddPlacePopup({ isOpen, onClose, onAddPlace, isLoading }) {
         required
       />
       <span id="imagelink-error" className="popup__error"></span>
-      <button type="submit" name="add-place" className="popup__button">
-        {isLoading ? "Сохранение..." : "Создать"}
-      </button>
     </PopupWithForm>
   );
 }

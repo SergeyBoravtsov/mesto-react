@@ -34,10 +34,14 @@ function App() {
     const isLiked = card.likes.some((i) => i._id === currentUser._id);
 
     // Отправляем запрос в API и получаем обновлённые данные карточки
-    api.changeLikeCardStatus(card._id, !isLiked).then((newCard) => {
+    api.changeLikeCardStatus(card._id, !isLiked)
+    .then((newCard) => {
       setCards((state) =>
         state.map((item) => (item._id === card._id ? newCard : item))
       );
+    })
+    .catch((err) => {
+      console.error(err);
     });
   }
 
@@ -48,7 +52,9 @@ function App() {
         console.log(answer);
         setCards(cards.filter((item) => item._id !== card._id));
       })
-      .catch((err) => console.error(err));
+      .catch((err) => {
+        console.error(err);
+      });
   }
 
   function handleCardClick(card) {
@@ -84,7 +90,10 @@ function App() {
         closeAllPopups();
         setIsLoadingData(false);
       })
-      .catch((err) => console.error(err));
+      .catch((err) => {
+        console.error(err);
+        setIsLoadingData(false);
+      });
   }
 
   function handleUpdateAvatar(avatarInputValue) {
@@ -96,7 +105,10 @@ function App() {
         closeAllPopups();
         setIsLoadingData(false);
       })
-      .catch((err) => console.error(err));
+      .catch((err) => {
+        console.error(err);
+        setIsLoadingData(false);
+      });
   }
 
   function handleAddPlaceSubmit(placeInputsValues) {
@@ -104,11 +116,14 @@ function App() {
     api
       .addCard(placeInputsValues)
       .then((newCard) => {
-        setCards([...cards, newCard]);
+        setCards([newCard, ...cards]);
         closeAllPopups();
         setIsLoadingData(false);
       })
-      .catch((err) => console.error(err));
+      .catch((err) => {
+        console.error(err);
+        setIsLoadingData(false);
+      });
   }
 
   return (
